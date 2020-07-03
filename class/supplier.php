@@ -19,7 +19,20 @@ function autoCode(){
     return $kodeBarang;
 }
 
+function listAkun(){
+    $queryAkun =  "select * from keu_5akun" ;
+    $fetchnya= mysql_query($queryAkun) or die(mysql_error());
 
+    $listAkun = '<select class="form-control">';
+    while( $rowAkun = mysql_fetch_assoc($fetchnya) )
+    {
+        $listAkun =  $listAkun . "<option value=\"" . $rowAkun['noakun'] . "\" >".$rowAkun['noakun']. " - ". $rowAkun['namaakun'] . "</option>\n";
+    }
+
+    $listAkun = $listAkun."</select>";
+
+    echo $listAkun;
+}
 
 function tipeSupplier(){
 
@@ -28,7 +41,7 @@ function tipeSupplier(){
     return false;
     $fieldDetail = mysql_fetch_array( $field_query );
     //print_r($fieldDetail);
-    $tipe = preg_replace( '/(^set\()|(^enum\()|\'|\)/i', '', $fieldDetail['type'] );
+    $tipe = preg_replace( '/(^set\()|(^enum\()|\'|\)/i', '', $fieldDetail['Type'] );
     $list = explode( ',', $tipe );
     
     $listnya = '<select class="form-control">';

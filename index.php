@@ -24,15 +24,14 @@
     </head>
 <body>
 <section class="page-section" id="tengah" style="padding-left:100px; padding-right:100px;">
+
 <?php
 
 $sql="SELECT * FROM keu_5klsupplier";
 
 $fetch= mysql_query($sql) or die(mysql_error());
 
-$row = mysql_fetch_array($fetch, MYSQLI_ASSOC);
 
-print_r($row);
 ?>
     <div style="padding-bottom:20px;">
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#formTambah">Tambah Kelompok</button>
@@ -47,24 +46,16 @@ print_r($row);
         </tr>
     </thead>
     <tbody>
-        <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        </tr>
-        <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        </tr>
-        <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        </tr>
+    <?php
+        while( $row = mysql_fetch_assoc($fetch) ){
+            echo '<tr>
+                <th scope="row">'.$row['kodeklp'].'</th>
+                <td>'.$row['namaklp'].'</td>
+                <td>'.$row['noakun'].'</td>
+                <td>'.$row['tipe'].'</td>
+                </tr>';
+        }
+    ?>
     </tbody>
     
 </section>
@@ -90,7 +81,7 @@ print_r($row);
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">No Akun :</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <?php listAkun(); ?>
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Tipe :</label>
