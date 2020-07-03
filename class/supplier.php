@@ -1,8 +1,8 @@
 <?php
 
-function autoCode(){
+function autoCode($tipe){
 
-    $autoCode   = mysql_query("SELECT max(kodeklp) as maxCode FROM keu_5klsupplier");
+    $autoCode   = mysql_query("SELECT max(kodeklp) as maxCode FROM keu_5klsupplier where kodeklp like '".$tipe."%'");
     $data       = mysql_fetch_array($autoCode);
     $maxCode    = $data['maxCode'];
 
@@ -24,10 +24,10 @@ function listAkun(){
     $queryAkun =  "select * from keu_5akun where noakun like '211%'" ;
     $fetchnya= mysql_query($queryAkun) or die(mysql_error());
 
-    $listAkun = '<select name="noakun" class="form-control">';
+    $listAkun = '<select id="noakun" name="noakun" class="form-control">';
     while( $rowAkun = mysql_fetch_assoc($fetchnya) )
     {
-        $listAkun =  $listAkun . "<option value=\"" . $rowAkun['noakun'] . "\" >".$rowAkun['noakun']. " - ". $rowAkun['namaakun'] . "</option>\n";
+        $listAkun =  $listAkun . "<option id=\"" . $rowAkun['noakun'] . "\" value=\"" . $rowAkun['noakun'] . "\" >".$rowAkun['noakun']. " - ". $rowAkun['namaakun'] . "</option>\n";
     }
 
     $listAkun = $listAkun."</select>";
@@ -45,10 +45,10 @@ function tipeSupplier(){
     $tipe = preg_replace( '/(^set\()|(^enum\()|\'|\)/i', '', $fieldDetail['Type'] );
     $list = explode( ',', $tipe );
     
-    $listnya = '<select name="tipesupplier" class="form-control">';
+    $listnya = '<select id="tipesupplier" name="tipesupplier" class="form-control">';
     foreach( $list as $val )
     {
-        $listnya =  $listnya . "<option value=\"" . $val . "\" >". $val . "</option>\n";
+        $listnya =  $listnya . "<option id=\"" . $val . "\" value=\"" . $val . "\" >". $val . "</option>\n";
     }
 
     $listnya = $listnya."</select>";

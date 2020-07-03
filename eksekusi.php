@@ -4,14 +4,29 @@
 
     //print_r($_POST);
 
-    $kode = substr($_POST['tipesupplier'],0,1).autoCode();
-    $nama = $_POST['nama'];
-    $noakun = $_POST['noakun'];
-    $tipesupplier = $_POST['tipesupplier'];
+    $action = $_GET['action'];
+    if(trim($action)=='delete'){
+        $id = $_GET['id'];
+        if(trim($id) <> ''){
+            $sql="DELETE FROM `keu_5klsupplier` WHERE  `kodeklp`='".$id."'";
+            $fetch= mysql_query($sql) or die(mysql_error());
+        }
+    }else if(trim($action)=='update'){
+        $id = $_GET['id'];
+        if(trim($id) <> ''){
+            $sql="DELETE FROM `keu_5klsupplier` WHERE  `kodeklp`='".$id."'";
+            $fetch= mysql_query($sql) or die(mysql_error());
+        }
+    }else{
+        $initial        = substr($_POST['tipesupplier'],0,1);
+        $kode           = $initial.autoCode($initial);
+        $nama           = $_POST['nama'];
+        $noakun         = $_POST['noakun'];
+        $tipesupplier   = $_POST['tipesupplier'];
 
-    $sql="INSERT INTO `db_test`.`keu_5klsupplier` (`kodeklp`, `namaklp`, `noakun`, `tipe`) VALUES ('$kode', '$nama', '$noakun', '$tipesupplier')";
+        $sql="INSERT INTO `keu_5klsupplier` (`kodeklp`, `namaklp`, `noakun`, `tipe`) VALUES ('$kode', '$nama', '$noakun', '$tipesupplier')";
+        $fetch= mysql_query($sql) or die(mysql_error());
+    }
 
-    $fetch= mysql_query($sql) or die(mysql_error());
-
-    header('location: index.php')
+    header('location: index.php');
 ?>
