@@ -13,17 +13,18 @@ function autoCode(){
         $urutan++;
     }
 
-    $huruf = "K";
-    $kodeBarang = $huruf . sprintf("%03s", $urutan);
+    //$huruf = "K";
+    //$kodeBarang = $huruf . sprintf("%03s", $urutan);
+    $kodeBarang = sprintf("%03s", $urutan);
 
     return $kodeBarang;
 }
 
 function listAkun(){
-    $queryAkun =  "select * from keu_5akun" ;
+    $queryAkun =  "select * from keu_5akun where noakun like '211%'" ;
     $fetchnya= mysql_query($queryAkun) or die(mysql_error());
 
-    $listAkun = '<select class="form-control">';
+    $listAkun = '<select name="noakun" class="form-control">';
     while( $rowAkun = mysql_fetch_assoc($fetchnya) )
     {
         $listAkun =  $listAkun . "<option value=\"" . $rowAkun['noakun'] . "\" >".$rowAkun['noakun']. " - ". $rowAkun['namaakun'] . "</option>\n";
@@ -44,7 +45,7 @@ function tipeSupplier(){
     $tipe = preg_replace( '/(^set\()|(^enum\()|\'|\)/i', '', $fieldDetail['Type'] );
     $list = explode( ',', $tipe );
     
-    $listnya = '<select class="form-control">';
+    $listnya = '<select name="tipesupplier" class="form-control">';
     foreach( $list as $val )
     {
         $listnya =  $listnya . "<option value=\"" . $val . "\" >". $val . "</option>\n";

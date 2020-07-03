@@ -69,15 +69,15 @@ $fetch= mysql_query($sql) or die(mysql_error());
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+        <form action="eksekusi.php" method="post">
       <div class="modal-body">
-        <form>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Kode :</label><br/>
             <strong><?php echo autoCode(); ?></strong>
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Nama :</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input name="nama" type="text" class="form-control" id="recipient-name">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">No Akun :</label>
@@ -87,12 +87,12 @@ $fetch= mysql_query($sql) or die(mysql_error());
             <label for="message-text" class="col-form-label">Tipe :</label>
             <?php tipeSupplier(); ?>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
       </div>
+        </form>
     </div>
   </div>
 </div>
